@@ -3,5 +3,8 @@ on:
  workflow_dispatch:
 jobs:
   build:
-    runs-on:
-      echo"hello-paul"
+    runs-on: ubuntu-latest
+    steps: 
+    - name:
+      
+      run: echo"hello-paul"
