@@ -1,6 +1,6 @@
 name: secondpipeline
 on:
- workflow_dispatched:
+ workflow_dispatch:
 jobs:
   build:
     runs-on:
