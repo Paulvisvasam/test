@@ -1,0 +1,7 @@
+name: secondpipeline
+on:
+ workflow_dispatched:
+jobs:
+  build:
+    runs-on:
+      echo"hello-paul"
