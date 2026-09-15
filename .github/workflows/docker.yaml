@@ -1,9 +1,26 @@
-name: secondpipeline
+name: Self Hosted Runner Test
+
 on:
- workflow_dispatch:
+  workflow_dispatch:
+
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps: 
-    - name:
-      run: echo "hello-paul"
+  test:
+    runs-on: self-hosted
+
+    steps:
+      - name: Check runner
+        run: |
+          echo "Hello from self-hosted runner"
+          hostname
+          whoami
+          pwd
+
+      - name: Check Docker
+        run: docker --version
+
+      - name: Check Java
+        run: java -version
+
+      - name: Check Maven
+        run: mvn -version
+
