@@ -1,0 +1,36 @@
+name: deploy
+
+on:
+  workflow_dispatch:
+
+env:
+  IMAGE_NAME: firstimage
+  CONTAINER_NAME: firstcontainer
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: check-out
+        run: java -version 
+
+      - name: Build JAR with Maven
+        run: mvn clean package -DskipTests
+
+      - name: Build Docker image
+        run: |
+          docker build -t $IMAGE_NAME:${{ github.sha }} .
+      - name: removing containername from existing
+        run: | 
+           docker rm -f $CONTAINER_NAME || true
+
+      - name: Run Docker container
+        run: |
+          docker run -d \
+            -p 8080:8080 \
+            --name $CONTAINER_NAME \
+            $IMAGE_NAME:${{ github.sha }}
